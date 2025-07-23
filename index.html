@@ -94,10 +94,57 @@
             gap: 25px;
         }
 
-        @media (min-width: 1200px) {
+        @media (min-width: 768px) {
             .main-grid {
                 grid-template-columns: 1fr 1fr;
             }
+        }
+
+        @media (min-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        /* Body Visualization */
+        .body-visualization {
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .body-svg-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .body-svg {
+            width: 300px;
+            height: 500px;
+        }
+
+        .muscle {
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+
+        .muscle:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        .muscle.selected {
+            opacity: 1;
+            filter: drop-shadow(0 0 12px var(--secondary));
         }
 
         /* Controls */
@@ -329,25 +376,13 @@
             color: var(--primary);
         }
 
-        /* Chart Containers */
+        /* Chart Container */
         .chart-container {
             height: 300px;
+            margin-top: 20px;
             background-color: var(--bg-secondary);
             border-radius: var(--border-radius);
             padding: 15px;
-            margin-bottom: 25px;
-        }
-
-        .chart-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        @media (min-width: 768px) {
-            .chart-grid {
-                grid-template-columns: 1fr 1fr;
-            }
         }
 
         /* Data Management */
@@ -405,10 +440,10 @@
 
         /* Analytics Section */
         .analytics-section {
+            margin-top: 30px;
             background: var(--bg-surface);
             border-radius: var(--border-radius);
             padding: 20px;
-            margin-bottom: 25px;
         }
 
         .analytics-grid {
@@ -570,67 +605,6 @@
             gap: 10px;
             margin-top: 10px;
         }
-
-        /* Visualization cards */
-        .visualization-cards {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        @media (min-width: 768px) {
-            .visualization-cards {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .visualization-card {
-            background: var(--bg-surface);
-            border-radius: var(--border-radius);
-            padding: 20px;
-        }
-
-        .visualization-card h3 {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .visualization-card h3 i {
-            color: var(--primary);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .stat-card {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .stat-card .value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 5px 0;
-        }
-
-        .stat-card .label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .distribution-chart {
-            height: 200px;
-            margin-top: 15px;
-        }
     </style>
 </head>
 <body>
@@ -641,10 +615,40 @@
                 <div class="badge"><i class="fas fa-chart-line"></i> <span id="overall-growth">0%</span> Growth</div>
             </div>
             <h1>Muscle Measurement Tracker Pro</h1>
-            <p class="subtitle">Advanced muscle tracking with comprehensive data visualization</p>
+            <p class="subtitle">Track, analyze, and visualize your muscle growth with persistent data storage</p>
         </header>
 
         <div class="main-grid">
+            <div class="body-visualization">
+                <h2 class="section-title"><i class="fas fa-body"></i> Body Visualization</h2>
+                <div class="body-svg-container">
+                    <svg class="body-svg" viewBox="0 0 300 500">
+                        <!-- Head -->
+                        <path class="muscle" data-muscle="Neck" d="M135,50 Q150,30 165,50 L160,80 L140,80 Z" fill="#3a3a3a"></path>
+                        <circle class="muscle" data-muscle="Head" cx="150" cy="40" r="25" fill="#3a3a3a"></circle>
+                        
+                        <!-- Torso -->
+                        <path class="muscle" data-muscle="Chest" d="M110,80 L190,80 L180,180 L120,180 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Abs" d="M110,180 L190,180 L180,280 L120,280 Z" fill="#3a3a3a"></path>
+                        
+                        <!-- Arms -->
+                        <path class="muscle" data-muscle="Left Bicep" d="M80,100 L110,100 L110,160 L80,160 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Right Bicep" d="M190,100 L220,100 L220,160 L190,160 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Left Forearm" d="M70,160 L110,160 L110,220 L70,220 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Right Forearm" d="M190,160 L230,160 L230,220 L190,220 Z" fill="#3a3a3a"></path>
+                        
+                        <!-- Legs -->
+                        <path class="muscle" data-muscle="Left Quad" d="M120,280 L140,280 L140,420 L110,420 L100,360 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Right Quad" d="M160,280 L180,280 L200,360 L190,420 L160,420 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Left Calf" d="M110,420 L140,420 L140,480 L110,480 Z" fill="#3a3a3a"></path>
+                        <path class="muscle" data-muscle="Right Calf" d="M160,420 L190,420 L190,480 L160,480 Z" fill="#3a3a3a"></path>
+                    </svg>
+                </div>
+                <div class="input-group">
+                    <button id="add-muscle-btn"><i class="fas fa-plus"></i> Add New Muscle to Track</button>
+                </div>
+            </div>
+
             <div class="controls">
                 <h2 class="section-title"><i class="fas fa-sliders-h"></i> Tracking Controls</h2>
                 
@@ -675,10 +679,6 @@
                 
                 <button id="save-measurement"><i class="fas fa-save"></i> Save Measurement</button>
                 
-                <div class="input-group">
-                    <button id="add-muscle-btn"><i class="fas fa-plus"></i> Add New Muscle to Track</button>
-                </div>
-                
                 <h3 class="section-title" style="margin-top: 30px;"><i class="fas fa-chart-line"></i> Tracked Muscles</h3>
                 <div class="muscle-panels" id="muscle-panels-container">
                     <!-- Muscle panels will be added here dynamically -->
@@ -698,6 +698,10 @@
                         <i class="fas fa-file-pdf"></i>
                         <span>Export to PDF</span>
                     </div>
+                    <div class="data-btn" id="export-csv">
+                        <i class="fas fa-file-csv"></i>
+                        <span>Export to CSV</span>
+                    </div>
                     <div class="data-btn danger-btn" id="reset-data">
                         <i class="fas fa-trash-alt"></i>
                         <span>Reset All Data</span>
@@ -711,90 +715,51 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="visualization-cards">
-                <div class="analytics-section">
-                    <h2 class="section-title"><i class="fas fa-chart-pie"></i> Analytics & Insights</h2>
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <h4><i class="fas fa-trophy"></i> Overall Progress</h4>
-                            <div class="analytics-value" id="overall-progress">0%</div>
-                            <div class="analytics-label">Since you started tracking</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progress-bar-fill" style="width: 0%"></div>
-                            </div>
-                        </div>
-                        <div class="analytics-card">
-                            <h4><i class="fas fa-calendar-check"></i> Consistency</h4>
-                            <div class="analytics-value" id="consistency-score">0%</div>
-                            <div class="analytics-label">Measurements per week</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="consistency-bar" style="width: 0%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="label">Muscles Tracked</div>
-                            <div class="value" id="muscles-tracked">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Total Measurements</div>
-                            <div class="value" id="total-measurements">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Avg. Growth</div>
-                            <div class="value" id="avg-growth">0%</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Longest Streak</div>
-                            <div class="value" id="longest-streak">0</div>
-                            <div class="label">days</div>
-                        </div>
-                    </div>
-                    
-                    <div class="imbalance-warning" id="imbalance-warning" style="display: none;">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div class="imbalance-content">
-                            <h4>Muscle Imbalance Detected</h4>
-                            <p id="imbalance-detail">Your right bicep is 4% larger than your left. Consider adding unilateral exercises to your routine.</p>
-                        </div>
+        <div class="analytics-section">
+            <h2 class="section-title"><i class="fas fa-chart-pie"></i> Analytics & Insights</h2>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h4><i class="fas fa-trophy"></i> Overall Progress</h4>
+                    <div class="analytics-value" id="overall-progress">0%</div>
+                    <div class="analytics-label">Since you started tracking</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-bar-fill" style="width: 0%"></div>
                     </div>
                 </div>
-                
-                <div class="visualization-card">
-                    <h3><i class="fas fa-chart-bar"></i> Muscle Comparison</h3>
-                    <div class="chart-container">
-                        <canvas id="comparison-chart"></canvas>
+                <div class="analytics-card">
+                    <h4><i class="fas fa-calendar-check"></i> Consistency</h4>
+                    <div class="analytics-value" id="consistency-score">0%</div>
+                    <div class="analytics-label">Measurements per week</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="consistency-bar" style="width: 0%"></div>
                     </div>
                 </div>
-                
-                <div class="visualization-card">
-                    <h3><i class="fas fa-history"></i> Progress Timeline</h3>
-                    <div class="chart-container">
-                        <canvas id="progress-chart"></canvas>
-                    </div>
+            </div>
+            
+            <div class="imbalance-warning" id="imbalance-warning" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="imbalance-content">
+                    <h4>Muscle Imbalance Detected</h4>
+                    <p id="imbalance-detail">Your right bicep is 4% larger than your left. Consider adding unilateral exercises to your routine.</p>
                 </div>
-                
-                <div class="visualization-card">
-                    <h3><i class="fas fa-chart-pie"></i> Measurement Distribution</h3>
-                    <div class="distribution-chart">
-                        <canvas id="distribution-chart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="achievements-section">
-                    <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
-                    <div class="achievements-grid" id="achievements-container">
-                        <!-- Achievements will be added here dynamically -->
-                    </div>
-                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="progress-chart"></canvas>
+        </div>
+        
+        <div class="achievements-section">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
+            <div class="achievements-grid" id="achievements-container">
+                <!-- Achievements will be added here dynamically -->
             </div>
         </div>
 
         <footer>
-            <p>Muscle Measurement Tracker Pro &copy; 2023 | Advanced analytics and visualization</p>
+            <p>Muscle Measurement Tracker Pro &copy; 2023 | Your data is saved in this browser</p>
         </footer>
     </div>
 
@@ -831,12 +796,12 @@
         const newMuscleName = document.getElementById('new-muscle-name');
         const confirmAddMuscle = document.getElementById('confirm-add-muscle');
         const progressChartCtx = document.getElementById('progress-chart').getContext('2d');
-        const comparisonChartCtx = document.getElementById('comparison-chart').getContext('2d');
-        const distributionChartCtx = document.getElementById('distribution-chart').getContext('2d');
+        const musclesSvg = document.querySelectorAll('.muscle');
         const exportJsonBtn = document.getElementById('export-json');
         const importJsonBtn = document.getElementById('import-json');
         const importFileInput = document.getElementById('import-file');
         const exportPdfBtn = document.getElementById('export-pdf');
+        const exportCsvBtn = document.getElementById('export-csv');
         const resetDataBtn = document.getElementById('reset-data');
         const resetConfirm = document.getElementById('reset-confirm');
         const cancelReset = document.getElementById('cancel-reset');
@@ -850,10 +815,6 @@
         const consistencyBar = document.getElementById('consistency-bar');
         const imbalanceWarning = document.getElementById('imbalance-warning');
         const imbalanceDetail = document.getElementById('imbalance-detail');
-        const musclesTracked = document.getElementById('muscles-tracked');
-        const totalMeasurements = document.getElementById('total-measurements');
-        const avgGrowth = document.getElementById('avg-growth');
-        const longestStreak = document.getElementById('longest-streak');
 
         // Initialize date field to today
         measurementDate.valueAsDate = new Date();
@@ -864,7 +825,7 @@
             setupAchievements();
             renderMusclePanels();
             setupEventListeners();
-            setupCharts();
+            setupChart();
             updateAnalytics();
         }
 
@@ -1091,59 +1052,24 @@
             let totalGrowth = 0;
             let muscleCount = 0;
             let totalMeasurements = 0;
-            let growthCount = 0;
-            let longestStreakDays = 0;
             
             Object.keys(muscleData).forEach(muscle => {
                 const measurements = muscleData[muscle];
-                muscleCount++;
                 totalMeasurements += measurements.length;
-                
-                // Calculate streak
-                let currentStreak = 0;
-                if (measurements.length > 0) {
-                    let prevDate = new Date(measurements[0].date);
-                    currentStreak = 1;
-                    
-                    for (let i = 1; i < measurements.length; i++) {
-                        const currentDate = new Date(measurements[i].date);
-                        const diffDays = Math.floor((currentDate - prevDate) / (1000 * 60 * 60 * 24));
-                        
-                        if (diffDays === 1) {
-                            currentStreak++;
-                        } else if (diffDays > 1) {
-                            if (currentStreak > longestStreakDays) {
-                                longestStreakDays = currentStreak;
-                            }
-                            currentStreak = 1;
-                        }
-                        prevDate = currentDate;
-                    }
-                    
-                    if (currentStreak > longestStreakDays) {
-                        longestStreakDays = currentStreak;
-                    }
-                }
                 
                 if (measurements.length >= 2) {
                     const initial = measurements[0].value;
                     const latest = measurements[measurements.length - 1].value;
                     const growth = ((latest - initial) / initial * 100);
                     totalGrowth += growth;
-                    growthCount++;
+                    muscleCount++;
                 }
             });
             
-            // Update stats
-            musclesTracked.textContent = muscleCount;
-            totalMeasurements.textContent = totalMeasurements;
-            longestStreak.textContent = longestStreakDays;
-            
             // Calculate overall progress
-            const avgGrowth = growthCount > 0 ? (totalGrowth / growthCount) : 0;
+            const avgGrowth = muscleCount > 0 ? (totalGrowth / muscleCount) : 0;
             overallGrowth.textContent = `${avgGrowth.toFixed(1)}%`;
             overallProgress.textContent = `${avgGrowth.toFixed(1)}%`;
-            avgGrowth.textContent = `${avgGrowth.toFixed(1)}%`;
             progressBarFill.style.width = `${Math.min(100, Math.max(0, avgGrowth))}%`;
             
             // Calculate consistency
@@ -1171,9 +1097,6 @@
                     }
                 }
             }
-            
-            // Update charts
-            updateCharts();
         }
 
         // Render muscle panels
@@ -1262,6 +1185,19 @@
             });
             confirmAddMuscle.addEventListener('click', addNewMuscle);
             
+            // Muscle SVG click event
+            musclesSvg.forEach(muscle => {
+                muscle.addEventListener('click', function() {
+                    // Highlight selected muscle
+                    musclesSvg.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Select the muscle in the dropdown
+                    const muscleName = this.dataset.muscle;
+                    muscleSelect.value = muscleName;
+                });
+            });
+            
             // Event delegation for panel buttons
             musclePanelsContainer.addEventListener('click', function(e) {
                 const panel = e.target.closest('.muscle-panel');
@@ -1289,6 +1225,7 @@
             importJsonBtn.addEventListener('click', () => importFileInput.click());
             importFileInput.addEventListener('change', importFromJson);
             exportPdfBtn.addEventListener('click', exportToPdf);
+            exportCsvBtn.addEventListener('click', exportToCsv);
             
             // Reset data buttons
             resetDataBtn.addEventListener('click', () => {
@@ -1420,9 +1357,8 @@
             saveData();
         }
 
-        // Setup the charts
-        function setupCharts() {
-            // Progress Chart (Line)
+        // Setup the chart
+        function setupChart() {
             window.progressChart = new Chart(progressChartCtx, {
                 type: 'line',
                 data: {
@@ -1477,108 +1413,6 @@
                     }
                 }
             });
-            
-            // Comparison Chart (Bar)
-            window.comparisonChart = new Chart(comparisonChartCtx, {
-                type: 'bar',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        label: 'Current Measurement (cm)',
-                        data: [],
-                        backgroundColor: '#bb86fc',
-                        borderColor: '#3700b3',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: '#e0e0e0'
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#a0a0a0'
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#a0a0a0'
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Distribution Chart (Pie)
-            window.distributionChart = new Chart(distributionChartCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        data: [],
-                        backgroundColor: [
-                            '#bb86fc',
-                            '#03dac6',
-                            '#cf6679',
-                            '#ff9800',
-                            '#4caf50',
-                            '#9c27b0',
-                            '#2196f3',
-                            '#ffeb3b'
-                        ],
-                        borderColor: 'rgba(0, 0, 0, 0.1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                color: '#e0e0e0'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update charts with current data
-        function updateCharts() {
-            // Update comparison chart (bar chart)
-            const muscleNames = Object.keys(muscleData);
-            const currentMeasurements = muscleNames.map(muscle => {
-                const measurements = muscleData[muscle];
-                return measurements.length > 0 ? measurements[measurements.length - 1].value : 0;
-            });
-            
-            window.comparisonChart.data.labels = muscleNames;
-            window.comparisonChart.data.datasets[0].data = currentMeasurements;
-            window.comparisonChart.update();
-            
-            // Update distribution chart (doughnut chart)
-            const measurementDistribution = muscleNames.map(muscle => {
-                return muscleData[muscle].length;
-            });
-            
-            window.distributionChart.data.labels = muscleNames;
-            window.distributionChart.data.datasets[0].data = measurementDistribution;
-            window.distributionChart.update();
         }
 
         // Show graph for a specific muscle
@@ -1596,6 +1430,52 @@
             window.progressChart.data.datasets[0].data = values;
             window.progressChart.data.datasets[0].label = `${muscle} Measurement (cm)`;
             window.progressChart.update();
+        }
+
+        // Make panels draggable
+        function makePanelsDraggable() {
+            const panels = document.querySelectorAll('.draggable');
+            panels.forEach(panel => {
+                panel.addEventListener('mousedown', startDrag);
+            });
+            
+            let currentPanel = null;
+            let offsetX, offsetY;
+            
+            function startDrag(e) {
+                if (e.target.closest('.action-btn')) return;
+                
+                currentPanel = this;
+                currentPanel.classList.add('dragging');
+                
+                const rect = currentPanel.getBoundingClientRect();
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+                
+                document.addEventListener('mousemove', dragPanel);
+                document.addEventListener('mouseup', stopDrag);
+            }
+            
+            function dragPanel(e) {
+                if (!currentPanel) return;
+                
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                
+                currentPanel.style.left = `${x}px`;
+                currentPanel.style.top = `${y}px`;
+                currentPanel.style.position = 'absolute';
+                currentPanel.style.zIndex = '1000';
+            }
+            
+            function stopDrag() {
+                if (currentPanel) {
+                    currentPanel.classList.remove('dragging');
+                    currentPanel = null;
+                }
+                document.removeEventListener('mousemove', dragPanel);
+                document.removeEventListener('mouseup', stopDrag);
+            }
         }
 
         // Export data to JSON file
@@ -1646,6 +1526,34 @@
                 }
             };
             reader.readAsText(file);
+        }
+
+        // Export data to CSV
+        function exportToCsv() {
+            let csvContent = "Muscle,Date,Measurement (cm)\n";
+            
+            Object.keys(muscleData).forEach(muscle => {
+                muscleData[muscle].forEach(measurement => {
+                    csvContent += `"${muscle}","${measurement.date}",${measurement.value}\n`;
+                });
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "muscle-data.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Unlock achievement
+            if (!unlockedAchievements.includes('data_exporter')) {
+                unlockedAchievements.push('data_exporter');
+                renderAchievements();
+                saveData();
+            }
         }
 
         // Export to PDF
@@ -1708,6 +1616,48 @@
                 doc.addImage(chartImage, 'PNG', 20, 30, 170, 80);
             }
             
+            // Detailed data
+            doc.addPage();
+            doc.setFontSize(14);
+            doc.setTextColor(224, 224, 224);
+            doc.text('Detailed Measurements', 105, 20, null, null, 'center');
+            
+            yPosition = 30;
+            Object.keys(muscleData).forEach((muscle, index) => {
+                if (index > 0 && yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(187, 134, 252);
+                doc.text(muscle, 20, yPosition);
+                yPosition += 7;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(160, 160, 160);
+                doc.text('Date', 20, yPosition);
+                doc.text('Measurement (cm)', 70, yPosition);
+                doc.text('Growth', 120, yPosition);
+                yPosition += 5;
+                
+                muscleData[muscle].forEach((measurement, idx) => {
+                    doc.setTextColor(224, 224, 224);
+                    doc.text(measurement.date, 20, yPosition);
+                    doc.text(measurement.value.toString(), 70, yPosition);
+                    
+                    if (idx > 0) {
+                        const prevValue = muscleData[muscle][idx-1].value;
+                        const growth = ((measurement.value - prevValue) / prevValue * 100).toFixed(1);
+                        doc.text(`${growth >= 0 ? '+' : ''}${growth}%`, 120, yPosition);
+                    }
+                    
+                    yPosition += 7;
+                });
+                
+                yPosition += 10;
+            });
+            
             // Save the PDF
             doc.save('muscle-measurement-report.pdf');
             
@@ -1738,17 +1688,8 @@
                 consistencyBar.style.width = '0%';
                 imbalanceWarning.style.display = 'none';
                 
-                // Reset stats
-                musclesTracked.textContent = '0';
-                totalMeasurements.textContent = '0';
-                avgGrowth.textContent = '0%';
-                longestStreak.textContent = '0';
-                
                 // Reset achievements display
                 renderAchievements();
-                
-                // Reset charts
-                updateCharts();
                 
                 // Save reset state
                 saveData();
